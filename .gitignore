@@ -193,5 +193,12 @@ TSWLatexianTemp*
 # KBibTeX
 *~[0-9]*
 
-# auto folder when using emacs and auctex 
+# auto folder when using emacs and auctex
 /auto/*
+**/auto/
+
+# Swap Files
+*.swp
+
+# Preamble cache
+**/_region_.tex
