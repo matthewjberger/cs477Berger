@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{tikz}
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
@@ -254,21 +255,33 @@
     	\item \(\mathit{(n-1)!}\ \text{and}\ \mathit{n!}\)
     	\item \(\mathit{\log_2n}\ \text{and}\ \mathit{\ln{n}}\)	
     	\item \(\mathit{2^\mathit{n-1}}\ \text{and}\ \mathit{2^n}\)
-    	\item \(\mathit{\log_22n}\ \text{and}\ \mathit{\log_2n^2}\)
+    	\item \(\mathit{\log_2^2n}\ \text{and}\ \mathit{\log_2n^2}\)
     \end{enumerate}
     
     \textbf{Solution}
+    
+    \begin{enumerate}[label=\alph*)]
+    	\item \(same\)
+    	\item \(smaller\)	
+    	\item \(same\)
+    	\item \(larger\)
+    \end{enumerate}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[5]
 	\textbf{[Extra credit - 20 points]} Using the formal definition of the asymptotic notations, prove the following statements:
     
     \begin{enumerate}[label=\alph*)]
-    	\item \(5n^2 + 20 \in \bigo{O}(n^2)\)
-    	\item \(n + 23 \in \bigo{O}(n^3)\)
+    	\item \(5n^2 + 20 \in \bigo(n^2)\)
+    	\item \(n + 23 \in \bigo(n^3)\)
     \end{enumerate}
     
     \textbf{Solution}
+    
+    \begin{enumerate}[label=\alph*)]
+    	\item \(0 \leq 5n^2 + 20 \leq cn^2  \rightarrow c \geq \frac{20}{n^2} + 5\ and\ n_0 \geq 1 \\ c = 25\ and\ n_o=1\)
+    	\item \(n + 23 \in \bigo(n^3)\)
+    \end{enumerate}
 \end{homeworkProblem}
 
 \end{document}
