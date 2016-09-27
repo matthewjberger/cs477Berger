@@ -284,7 +284,7 @@ Position of Leftmost Largest Integer: 2
 	Let $n=2i$ where $i>0$. The left hand side of the recurrence equation is $n-1=2i-1$. The right hand side is:
 	\[
     	\begin{split}
-    		C(n/2) + C(n/2) + 1 &= C(2i/2) + C((2i/2 + 1 \\
+    		C(n/2) + C(n/2) + 1 &= C(2i/2) + C(2i+2) + 1 \\
     		&= 2C(i) + 1 = 2(i - 1) + 1 = 2i - 1 \\
     	\end{split}
     \]
