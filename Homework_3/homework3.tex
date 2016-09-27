@@ -1,0 +1,401 @@
+\documentclass[14pt]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{relsize}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% C++ Code Listing Configuration
+%
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+backgroundcolor=\color{lbcolor},
+    tabsize=4,    
+%   rulecolor=,
+    language=[GNU]C++,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=false,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        numbers=left,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.026,0.112,0.095},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+%        \lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#3}
+\newcommand{\hmwkDueDate}{September 27, 2016}
+\newcommand{\hmwkDueTime}{2:30pm}
+\newcommand{\hmwkClass}{CS 477}
+\newcommand{\hmwkClassInstructor}{Monica Nicolescu}
+\newcommand{\hmwkAuthorName}{Matthew J. Berger}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at \hmwkDueTime}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Alias for the Extra Credit section header
+\newcommand{\extracredit}{\textbf{\large Extra Credit}}
+
+% Alias for the Big-O Symbol
+\newcommand{\bigo}{\mathcal{O}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \textbf{(U \& G-required)[40 points]}  
+
+    \begin{enumerate}[label=(\alph*)]    
+        \item \([20\ \text{points}]\) Implement in C/C++ a divide and conquer algorithm for finding a position of the largest element in an array of n numbers. Show how your algorithm runs on the input: \\A = [1 4 9 3 4 9 5 6 9 3 7].
+        \item \([10\ \text{points}]\) What will be your algorithm's output for arrays with several elements of the largest value? Indicate the answer on the input given above.
+        \item \([10\ \text{points}]\) Set up and solve a recurrence relation for the number of key comparisons made by your algorithm.
+    \end{enumerate}
+
+    \textbf{Solution:}
+     \begin{enumerate}[label=(\alph*)]    
+        \item The algorithm I've created for this problem is.:
+\begin{lstlisting}
+int GetPositionOfMaxInteger(int* arr, int start, int end)
+{
+    if (start == end) return start;
+
+    int midpoint = floor(((start + end) / 2.0) + 0.5);
+    int maxPosLeft = GetPositionOfMaxInteger(arr, start, midpoint - 1);
+    int maxPosRight = GetPositionOfMaxInteger(arr, midpoint, end);
+
+    return (arr[maxPosLeft] >= arr[maxPosRight]) ? maxPosLeft : maxPosRight;
+}
+\end{lstlisting}
+	    The program to run the test input against the algorithm is:
+\begin{lstlisting}
+#include <iostream>
+#include <cmath>
+int GetPositionOfMaxInteger(int* arr, int start, int end)
+{
+    if (start == end) return start;
+
+    int midpoint = floor(((start + end) / 2.0) + 0.5);
+    int maxPosLeft = GetPositionOfMaxInteger(arr, start, midpoint - 1);
+    int maxPosRight = GetPositionOfMaxInteger(arr, midpoint, end);
+
+    return (arr[maxPosLeft] >= arr[maxPosRight]) ? maxPosLeft : maxPosRight;
+}
+int main(int argc, char** argv)
+{
+    int arr[] = { 1, 4, 9, 3, 4, 9, 5, 6, 9, 3, 7 };
+    int size = 10;
+    int pos = GetPositionOfMaxInteger(arr, 0, size);
+    std::cout << "Requested array: ";
+    for(int i = 0; i < size; i++)
+    {
+        std::cout << arr[i];
+        if (i < size - 1) std::cout << ",";
+        else std::cout << std::endl;
+    }
+    std::cout << "Position of Leftmost Largest Integer: " << pos << std::endl;
+    return 0;
+}
+\end{lstlisting}
+\pagebreak
+The output for this program is:
+\begin{lstlisting}
+Requested array: 1,4,9,3,4,9,5,6,9,3
+Position of Leftmost Largest Integer: 2
+\end{lstlisting}
+
+	\item The algorithm's output for arrays with several elements of the largest value will be the position of the leftmost largest value in the array. This is the first occurrence of the largest value when the array is scanned iteratively from left to right.
+	
+	\item The recurrence for the number of key comparisons made by my algorithm is:
+	\item[] \hfil $C(n) = C(n/2) + C(n/2) + 1\ for\ n > 1, C(1) = 0$
+	\item[] Solving with backwards substitutions for $n = 2^k$ produces the following:
+    \[
+    	\begin{split}
+    		C(2^k) &= 2C(2^{k-1}) + 1 \\
+    		&= 2[2C(2^{k-2} + 1] + 1 = 2^2C(2^{k-2}) + 2 + 1 \\
+    		&= ... \\
+    		&= 2^iC(2^{k-i}) + 2^{i-1} + 2^{i-2} + ... + 1 \\
+    		&= 2^kC(2^{k-k} + 2^{k-1} + 2^{k-2}+...+1=2^k-1=n-1
+    	\end{split}
+    \]
+	
+	$C(n) = n - 1$ satisfies the recurrence for each value of $n > 1$ by substitution into the recurrence equation and looking at only the even or odd cases. 
+	
+	Let $n=2i$ where $i>0$. The left hand side of the recurrence equation is $n-1=2i-1$. The right hand side is:
+	\[
+    	\begin{split}
+    		C(n/2) + C(n/2) + 1 &= C(2i/2) + C((2i/2 + 1 \\
+    		&= 2C(i) + 1 = 2(i - 1) + 1 = 2i - 1 \\
+    	\end{split}
+    \]
+	This is equivalent to the left hand side. \\ \\
+	Let $n=2i + 1$ where $i>0$. The left hand side of the recurrence equation is $n-1=2i$. The right hand side is:
+	\[
+    	\begin{split}
+    		C(n/2) + C(n/2) + 1 &= C((2i+1)/2) + C((2i+1)/2 + 1 \\
+    		&= C(i + 1) + C(i) + 1 = (i+1-1)+(i-1)+1=2i \\
+    	\end{split}
+    \]
+    
+    This is equivalent to the left hand side as well.
+    \end{enumerate}
+    
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \textbf{(U \& G-required)[40 points]} 
+    \begin{enumerate}[label=\alph*)]
+    	\item \([20\ \text{points}]\) Is Mergesort a stable sorting algorithm? Give a justification for your answer or provide a counter example.
+    	\item \([20\ \text{points}]\) Is Quicksort a stable sorting algorithm? Give a justification for your answer or provide a counterexample.
+    \end{enumerate}
+    
+    \textbf{Solution:}
+ 
+     \begin{enumerate}[label=\alph*)]
+    	\item Most implementations of Mergesort $\textbf{are}$ in fact stable sort implementations. This means they "preserve the input order of equal elements in the sorted output". Depending on how the merge is performed, the algorithm can become stable or unstable. For instance, if comparing two elements and using the $\leq$ sign ( a stable merge operation ) you can make the merge operation unstable by using a $<$ sign instead. This would prevent the input order from being preserved. In most cases however, the merge operation is implemented so that if you encounter equal elements you output the one that came from the "lower" half of the two halves being merged, thus preserving input order.
+    	\item The most efficient implementations of Quicksort $\textbf{are not}$ stable sort implementations. For instance, if comparing two equal items on either side of a pivot, most efficient implementations will actually reverse the two items. This does not preserve the input order and does not qualify as a stable sort.
+    \end{enumerate}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+	Implement in C/C++ an algorithm to rearrange elements of a given array of n real numbers so that all its negative elements precede all of its positive elements. Your algorithm should be both time-efficient and space-efficient. Show the output of your algorithm on the input array A = [4 -3 9 8 7 -4 -2 -1 0 6 -5].
+	
+ \textbf{Solution:}
+     \begin{enumerate}[label=(\alph*)]    
+        \item The algorithm I've created for this problem is.:
+\begin{lstlisting}
+void RearrangeArray(int* arr, int size)
+{
+    int firstPositivePosition, currentIndex;
+    for (currentIndex = 0, firstPositivePosition = -1; currentIndex < size; currentIndex++)
+    {
+        if (arr[currentIndex] < 0)
+        {
+            int tmp = arr[++firstPositivePosition];
+            arr[firstPositivePosition] = arr[currentIndex];
+            arr[currentIndex] = tmp;
+        }
+    }
+}
+\end{lstlisting}
+	    The program to run the test input against the algorithm is:
+\begin{lstlisting}
+#include <iostream>
+void RearrangeArray(int* arr, int size)
+{
+    int firstPositivePosition, currentIndex;
+    for (currentIndex = 0, firstPositivePosition = -1; currentIndex < size; currentIndex++)
+    {
+        if (arr[currentIndex] < 0)
+        {
+            int tmp = arr[++firstPositivePosition];
+            arr[firstPositivePosition] = arr[currentIndex];
+            arr[currentIndex] = tmp;
+        }
+    }
+}
+int main(int argc, char** argv){
+    int arr[] = { 4, -3, 9, 8, 7, -4, -2, -1, 0, 6, -5 };
+    int size = 11;
+    std::cout << "Requested array: ";
+    for(int i = 0; i < size; i++){
+        std::cout << arr[i];
+        if (i < size - 1) std::cout << ",";
+        else std::cout << std::endl;
+    }
+    RearrangeArray(arr, size);
+    std::cout << "Negative values moved to beginning of array: ";
+    for(int i = 0; i < size; i++){
+        std::cout << arr[i];
+        if (i < size - 1) std::cout << ",";
+        else std::cout << std::endl;
+    }
+}
+\end{lstlisting}
+\pagebreak
+The output for this program is:
+\begin{lstlisting}
+Requested array: 4,-3,9,8,7,-4,-2,-1,0,6,-5
+Negative values moved to beginning of array: -3,-4,-2,-1,-5,4,9,8,0,6,7
+\end{lstlisting}
+\end{enumerate}
+	
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+\extracredit\ (I'm an undergraduate)
+
+\textbf{[20 points]} Estimate how many times faster an average successful search will be in a sorted array of 100,000 elements if it is done by binary search versus sequential search.\\
+
+\solution
+
+For a sequential search, the complexity is $\bigo(N)$. For a binary search, the complexity is $\bigo\log_2N$. A sequential search would iterate over 100,000 elements at worst (if the desired item in the sorted array was at the very last position). The binary search at worst would iterate over $log_2(100,000) \approx 17$ elements. An average successful binary search is faster in this case by a factor of at least $100,000/17 \approx \textbf{5882.35}$.
+
+
+\end{homeworkProblem}
+
+\end{document}
