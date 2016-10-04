@@ -431,7 +431,16 @@ Numbers between range 2 and 7: 12
 \begin{homeworkProblem}[5]
 \extracredit\ (I'm an undergraduate)
 
-    \textbf{[20 points]} Explain how you would sort $n$ integers that span the range between $0$ to $n^3-1$ in $\bigo(n)$ time.
+    \textbf{[20 points]} Explain how you would sort $n$ integers that span the range between $0$ to $n^3-1$ in $\bigo(n)$ time. \\
+    
+    \solution 
+    
+    One possible solution is to represent and sort the numbers in a different base. For a base-k number system, any number $n$ can be represented by using $log_k(R)$ digits. Setting $k = n$ and $R = n^3$, it's clear that only $log_n(n^3) = $ \underline{3} digits are necessary to represent all the integers that span the range between $0$ to $n^3-1$. To perform the conversion, you must solve for $a$ and $b$ in $x = a*n^2+b*n+c$, where a,b,c are within our range and the actual number is equivalent to the product of a, b, and c. The largest number $(n^3-1)$ can be written to fit the form of the geometric sum formula.
+    \begin{itemize}
+    	\item[] \hfil \( \mathlarger{(n-1) * n^2 + (n-1) * n + n - 1 = (n-1)\frac{1-(-n)^3}{1-(-n)}}\)
+    \end{itemize}
+    
+    This makes the n-base system representation $(-n-1)$. Applying radix sort to the converted 3-digit base-n numbers makes the complexity $\theta(d(n+k)) = \theta(3(n+n))=\theta(n)$ which satisfies the requirement for this problem.
 
 \end{homeworkProblem}
 
