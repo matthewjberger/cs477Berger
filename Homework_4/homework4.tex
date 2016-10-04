@@ -1,0 +1,389 @@
+\documentclass[14pt]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{relsize}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% C++ Code Listing Configuration
+%
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+backgroundcolor=\color{lbcolor},
+    tabsize=4,    
+%   rulecolor=,
+    language=[GNU]C++,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=false,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        numbers=left,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.026,0.112,0.095},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+%        \lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#4}
+\newcommand{\hmwkDueDate}{October 4th, 2016}
+\newcommand{\hmwkDueTime}{2:30pm}
+\newcommand{\hmwkClass}{CS 477}
+\newcommand{\hmwkClassInstructor}{Monica Nicolescu}
+\newcommand{\hmwkAuthorName}{Matthew J. Berger}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at \hmwkDueTime}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Alias for the Extra Credit section header
+\newcommand{\extracredit}{\textbf{\large Extra Credit}}
+
+% Alias for the Big-O Symbol
+\newcommand{\bigo}{\mathcal{O}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \textbf{(U \& G-required)[20 points]}  
+
+    \begin{enumerate}[label=(\alph*)]    
+        \item \([20\ \text{points}]\) Assuming that the set of possible list values is {a, b, c, d}, sort the following list in alphabetical order using counting sort: b, c, d, c, b, a, a, b. At each step show how the values of your counting array and the final array.
+        \item \([10\ \text{points}]\) Illustrate the operation of Radix sort on the following list of English words: COW, DOG, SEA, RUG, ROW, MOB, BOX, TAB, BAR, EAR, TAR, DIG, BIG, TEA, NOW, FOX.
+    \end{enumerate}
+
+    \textbf{Solution:}
+    
+     \begin{enumerate}[label=(\alph*)]    
+        \item 
+        \begin{enumerate}[label=\arabic*.)]
+        	\item Make a counting array to store the number of occurrences of each unique item.
+        	\begin{table}[h]
+        	\def\arraystretch{1.5}%
+        	\hfil
+        		\begin{tabular}{|c|c|}
+        			\hline 
+        			Original & b c d c b a a b \\
+        			\hline
+        			Order    & a b c d \\
+        			\hline 
+        			Count    & 2 3 2 1 \\
+        			\hline 
+        		\end{tabular}
+        	\end{table}
+        	
+        	\item Modify the count array such that each element at each index stores the sum of previous counts.
+        	\begin{table}[h]
+        	\def\arraystretch{1.5}%
+        	\hfil
+        		\begin{tabular}{|c|c|}
+        			\hline
+        			Order    & a b c d \\
+        			\hline 
+         			Count    & 2 5 7 8 \\
+        			\hline 
+        		\end{tabular}
+        	\end{table}
+        	
+        	The modified count array indicates the position of each unique item in the output sequence. 
+        	
+        	\item Output each object from the input at the position indicated by the count array, then decrease its count by 1. Assume the output array is empty at the start. The index is zero-based so the count is one greater than the actual index of the item.
+        	\begin{table}[h]
+        	\def\arraystretch{1.5}%
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & \textbf{\em{b}} c d c b a a b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{2 \textbf{\em{5}} 7 8}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \phantom{0 0 0 0} b \phantom{0 0 0} \\
+        			\hline
+        		\end{tabular}
+        		$\rightarrow$
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b \textbf{\em{c}} d c b a a b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{2 4 \textbf{\em{7}} 8}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \phantom{0 0 0 0} b \phantom{0} c \phantom{0} \\
+        			\hline
+        		\end{tabular}
+        		$\rightarrow$
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b c \textbf{\em{d}} c b a a b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{2 4 6 \textbf{\em{8}}}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \phantom{0 0 0 0} b \phantom{0} c d \\
+        			\hline
+        		\end{tabular}
+        		$\rightarrow$
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b c d \textbf{\em{c}} b a a b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{2 4 \textbf{\em{6}} 7}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \phantom{0 0 0 0} b c c d \\
+        			\hline
+        		\end{tabular}
+        		$\rightarrow$
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b c d c \textbf{\em{b}} a a b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{2 \textbf{\em{4}} 7 14}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \phantom{0 0 0} b b c c d \\
+        			\hline
+        		\end{tabular}
+        		$\rightarrow$
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b c d c b \textbf{\em{a}} a b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{\textbf{\em{2}} 3 7 14}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \phantom{0} a \phantom{0} b b c c d \\
+        			\hline
+        		\end{tabular}
+        		$\rightarrow$
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b c d c b a \textbf{\em{a}} b \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{\textbf{\em{1}} 3 7 14}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & a a \phantom{0} b b c c d \\
+        			\hline
+        		\end{tabular}
+        		$\ \ \ \large{\rightarrow}\ \ $
+        		\begin{tabular}{|c|l|}
+        			\hline
+        			Original & b c d c b a a \textbf{\em{b}} \\
+        			\hline
+        		    Count    & \multicolumn{1}{|c|}{0 \textbf{\em{3}} 7 14}  \\
+        			\hline
+        			Index    & 0 1 2 3 4 5 6 7 \\
+        			\hline 
+        			Output   & \underline{a a b b b c c d} \\
+        			\hline
+        		\end{tabular}
+        	\end{table}
+        \end{enumerate}
+        
+        \item Radix sort sorts items by using the least significant 'digit' for comparison, working its way up to the most significant digit. Radix sort uses a counting sort as its sorting subroutine. 
+        \begin{itemize}
+        \item CO\underline{W}, DO\underline{G}, SE\underline{A}, RU\underline{G}, RO\underline{W}, MO\underline{B}, BO\underline{X}, TA\underline{B}, BA\underline{R}, EA\underline{R}, TA\underline{R}, DI\underline{G}, BI\underline{G}, TE\underline{A}, NO\underline{W}, FO\underline{X}. \\ $\rightarrow$ SEA, TEA, MOB, TAB, DOG, RUG, DIG, BIG, BAR, EAR, TAR, COW, ROW, NOW, BOX, FOX. 
+        
+        \item S\underline{E}A, T\underline{E}A, M\underline{O}B, T\underline{A}B, D\underline{O}G, R\underline{U}G, D\underline{I}G, B\underline{I}G, B\underline{A}R, E\underline{A}R, T\underline{A}R, C\underline{O}W, R\underline{O}W, N\underline{O}W, B\underline{O}X, F\underline{O}X \\ $\rightarrow$ TAB, BAR, EAR, TAR, SEA, TEA, DIG, BIG, MOB, DOG, COW, ROW, NOW, BOX, FOX, RUG.
+        
+        \item \underline{T}AB, \underline{B}AR, \underline{E}AR, \underline{T}AR, \underline{S}EA, \underline{T}EA, \underline{D}IG, \underline{B}IG, \underline{M}OB, \underline{D}OG, \underline{C}OW, \underline{R}OW, \underline{N}OW, \underline{B}OX, \underline{F}OX, \underline{R}UG. \\ $\rightarrow$ BAR, BIG, BOX, COW, DIG, DOG, EAR, FOX, MOB, NOW, ROW, RUG, SEA, TAB, TAR, TEA.
+        
+        This successfully sorts the list.
+        \end{itemize}
+    \end{enumerate}
+    
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \textbf{(U \& G-required)[40 points]} 
+    Implement in C or C++ an algorithm that given $n$ integers in the range $0$ to $k$ returns how many of the $n$ integers fall into a range $[a..b]$, given as an input. Your algorithm should use $\theta(n+k)$ processing time. Show the answer returned by your algorithm on the following input A = [5 6 9 4 4 2 2 9 5 3 4 0 1 8 5 3 8 7], and $a=2$, $b=7$. \\
+    
+    \textbf{Solution:}
+    
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \textbf{(U \& G-required)[40 points]} Consider a red-black tree formed by inserting $n$ nodes with RB-INSERT. Give a justification for the fact that if $n > 1$, then the three has at least one red node.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}[5]
+\extracredit\ (I'm an undergraduate)
+
+    \textbf{[20 points]} Explain how you would sort $n$ integers that span the range between $0$ to $n^3-1$ in $\bigo(n)$ time.
+
+\end{homeworkProblem}
+
+\end{document}
