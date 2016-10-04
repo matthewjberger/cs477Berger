@@ -210,8 +210,8 @@ backgroundcolor=\color{lbcolor},
         \item \([20\ \text{points}]\) Assuming that the set of possible list values is {a, b, c, d}, sort the following list in alphabetical order using counting sort: b, c, d, c, b, a, a, b. At each step show how the values of your counting array and the final array.
         \item \([10\ \text{points}]\) Illustrate the operation of Radix sort on the following list of English words: COW, DOG, SEA, RUG, ROW, MOB, BOX, TAB, BAR, EAR, TAR, DIG, BIG, TEA, NOW, FOX.
     \end{enumerate}
-
-    \textbf{Solution:}
+    
+\solution
     
      \begin{enumerate}[label=(\alph*)]    
         \item 
@@ -367,7 +367,7 @@ backgroundcolor=\color{lbcolor},
     \textbf{(U \& G-required)[40 points]} 
     Implement in C or C++ an algorithm that given $n$ integers in the range $0$ to $k$ returns how many of the $n$ integers fall into a range $[a..b]$, given as an input. Your algorithm should use $\theta(n+k)$ processing time. Show the answer returned by your algorithm on the following input A = [5 6 9 4 4 2 2 9 5 3 4 0 1 8 5 3 8 7], and $a=2$, $b=7$. \\
     
-    \textbf{Solution:}
+    \solution \\
     
     The algorithm I've created for this problem is as follows:
     \begin{lstlisting}
@@ -377,7 +377,7 @@ int CountOfNumbersInRange(int* arr, int min, int max, int size)
 {
     int count = 0;
     for(int i = 0; i < size; i++)
-        if ((min <= arr[i]) & (arr[i] <= max)) count++;
+        if ((min <= arr[i]) && (arr[i] <= max)) count++;
     return count;
 }
 
@@ -410,7 +410,20 @@ Numbers between range 2 and 7: 12
 \pagebreak
 
 \begin{homeworkProblem}
-    \textbf{(U \& G-required)[40 points]} Consider a red-black tree formed by inserting $n$ nodes with RB-INSERT. Give a justification for the fact that if $n > 1$, then the three has at least one red node.
+    \textbf{(U \& G-required)[40 points]} Consider a red-black tree formed by inserting $n$ nodes with RB-INSERT. Give a justification for the fact that if $n > 1$, then the three has at least one red node. \\
+    
+    \solution
+    
+    There are five rules for Red-Black Trees:
+    \begin{enumerate}
+    	\item Every node is either black or red.
+    	\item The root is always black.
+    	\item Every leaf is black.
+    	\item If a node is red, then both its sons are black.
+    	\item All paths from a single node to any leaf must contain an equal amount of black nodes.
+    \end{enumerate}
+    
+    Any Red-Black tree containing at least two elements will have at least one red node, because the inserted node is always colored red initially but any later modifications to the tree (such as fixing the colors) either leave the color of the newly added node as is (it stays red), or makes at least one other node red. 
 \end{homeworkProblem}
 
 \pagebreak
