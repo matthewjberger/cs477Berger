@@ -4,7 +4,7 @@ int CountOfNumbersInRange(int* arr, int min, int max, int size)
 {
     int count = 0;
     for(int i = 0; i < size; i++)
-        if ((min <= arr[i]) & (arr[i] <= max)) count++;
+        if ((min <= arr[i]) && (arr[i] <= max)) count++;
     return count;
 }
 
