@@ -1,0 +1,287 @@
+\documentclass[14pt]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{relsize}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% C++ Code Listing Configuration
+%
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+backgroundcolor=\color{lbcolor},
+    tabsize=4,
+%   rulecolor=,
+    language=[GNU]C++,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=false,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        numbers=left,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.026,0.112,0.095},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+%        \lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#5}
+\newcommand{\hmwkDueDate}{November 3rd, 2016}
+\newcommand{\hmwkDueTime}{2:30pm}
+\newcommand{\hmwkClass}{CS 477}
+\newcommand{\hmwkClassInstructor}{Monica Nicolescu}
+\newcommand{\hmwkAuthorName}{Matthew J. Berger}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at \hmwkDueTime}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Alias for the Extra Credit section header
+\newcommand{\extracredit}{\textbf{\large Extra Credit}}
+
+% Alias for the Big-O Symbol
+\newcommand{\bigo}{\mathcal{O}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+	\begin{itemize}
+		\item[\textbf{1.)}] \textbf{(U \& G Required)[100 points]}
+
+		Suppose you are consulting for a company that manufactures PC equipment and ships it
+to distributors all over the country. For each of the n next weeks, they have a projected
+supply si of equipment (measured in pounds), which has to be shipped by an air freight
+carrier. Each week’s supply can be carried by one of two air freight companies, A or B.
+		\begin{itemize}
+			\item Company A charges a fixed rate r per pound, so it costs $r * s_i$ to ship a week’s
+supply ($s_i$)
+			\item Company B makes contracts for a fixed amount c per week, independent of the
+weight. However, contracts with company B must be made in blocks of four
+consecutive weeks at a time.
+		\end{itemize}
+
+		A schedule, for the PC company, is a choice of air freight company (A or B) for each of
+the n weeks with the restriction that company B, whenever it is chosen, must be chosen
+for blocks of four contiguous weeks at a time. The cost of the schedule is the total amount
+paid to companies A and B, according to the description above.
+
+You are asked to give a polynomial time algorithm that takes a sequence of supply values
+$s_1, s_2, \dots, s_n$ and returns a schedule of minimum cost. In order to achieve this, you need to
+answer the following questions:
+
+		\begin{enumerate}[label=\alph*.)]
+			\item\ [20 points] Determine and \textbf{prove} the optimal substructure of the problem and write a recursive formula of an optimal solution (i.e., define the variable that you wish to
+optimize and explain how a solution to computing it can be obtained from solutions to
+subproblems). \\
+\textbf{Submit}: the recursive formula, along with definitions and explanations on
+what is computed.
+			\item\ [30 points] Write an algorithm that computes an optimal solution to this problem, based on the recurrence above. Implement your algorithm in C/C++ and run it on the
+following values:
+			\begin{itemize}
+				\item $r = 1$
+				\item $c = 10$
+				\item the sequence of $s_i$ values: 11, 9, 9, 12, 12, 12, 12, 9, 9, 11
+			\end{itemize}
+			\textbf{Submit}:
+			\begin{itemize}
+				\item A printed version of the algorithm (name your algorithm schedule.c or schedule.cpp)
+				\item A printout of the table that contains the solutions to the subproblems, run on the
+values given above (print the entire table!)
+			\end{itemize}
+			\item\ [20 points] Update the algorithm you developed at point (b) to enable the
+reconstruction of the optimal solution, i.e., which company was used in an optimal
+solution for shipping. (Hint: use an auxiliary table like we did in the examples in class.)
+Include these updates in your algorithm implementation from point (b).\\
+			\textbf{Submit}:
+			\begin{itemize}
+				\item A printed version of the algorithm (name your algorithm schedule\_1.c or
+schedule\_1.cpp).
+				\item A printout of the values that you obtain in the table containing the additional information needed to reconstruct the optimal solution, run on the values given
+above (print the entire table!)
+			\end{itemize}
+			\pagebreak
+			\item\ [30 points] Using the additional information computed at point (c), write an algorithm that outputs which company was used for shipping in the optimal schedule. Implement
+this algorithm in C/C++. \\
+			\textbf{Submit}:
+			\begin{itemize}
+				\item A printed version of the algorithm (name your algorithm schedule\_2.c or
+schedule\_2.cpp).
+				\item A printout of the \textbf{solution} to the problem, i.e., the optimal schedule. (e.g., A, A,
+B, A, B)
+			\end{itemize}
+		\end{enumerate}
+	\end{itemize}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}[3]
+	\textbf{Extra Credit: [20 points]} Indicate whether the following statements are true or false and justify your answers.
+	\begin{enumerate}[label=\alph*.)]
+		\item  If X and Y are sequences that both begin with the character A, every longest common
+subsequence of X and Y begins with A.
+		\item If X and Y are sequences that both end with the character A, some longest common
+subsequence of X and Y ends with A.
+	\end{enumerate}
+\end{homeworkProblem}
+\end{document}
