@@ -234,7 +234,18 @@ answer the following questions:
 optimize and explain how a solution to computing it can be obtained from solutions to
 subproblems). \\
 \textbf{Submit}: the recursive formula, along with definitions and explanations on
-what is computed.
+what is computed.\\
+
+\solution\\
+We'll call the algorithm $MINCOST(i)$. In this case, the algorithm computes the lowest cost possible to ship the the PC equipment to distributors for the first $i$ weeks. We'll also declare an algorithm called $OPTIMIZE(i,j)$ to find the company for the j-th week that would achieve $MINCOST(i)$. The best schedule for the first $i$ weeks will either be acquired through choosing company A for the i-th week (a single week) or by choosing company B for the previous 3 weeks as well as the i-th one (weeks $i,i-1,i-2,$ and $i-3$).
+
+The optimal substructure of this problem can be represented by the equation below:
+
+			\item[(1)]\hfil \( MINCOST(i) = min\{MINCOST(i-1) + r *s_i,\ MINCOST(i-4)+4c\} \) for $i \geq 4$
+
+However for $i < 4$, we must choose company A for each week:
+			\item[(2)]\hfil \( MINCOST(0) = 0\)
+			\item[(3)]\hfil \( MINCOST(i) = MINCOST(i-1)+r*s_i\)
 			\item\ [30 points] Write an algorithm that computes an optimal solution to this problem, based on the recurrence above. Implement your algorithm in C/C++ and run it on the
 following values:
 			\begin{itemize}
