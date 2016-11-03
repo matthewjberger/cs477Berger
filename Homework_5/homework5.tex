@@ -259,6 +259,75 @@ following values:
 				\item A printout of the table that contains the solutions to the subproblems, run on the
 values given above (print the entire table!)
 			\end{itemize}
+			\solution
+\begin{lstlisting}
+#include <algorithm>
+
+#define NUM_WEEKS 10
+#define COMPANY_A 0
+#define COMPANY_B 1
+
+int main()
+{
+    int r = 1;
+    int s[NUM_WEEKS] = { 11, 9, 9, 12, 12, 12, 12, 9, 9, 11 };
+    int c = 1;
+    int minCost[NUM_WEEKS] = {0};
+
+    int opt[NUM_WEEKS][NUM_WEEKS] = {{0}};
+
+    for(int i = 1; i < NUM_WEEKS; i++)
+    {
+        if(i < 4)
+        {
+            minCost[i] = minCost[i-1] + (r * s[i]);
+
+            for(int j = 1; j < i-1; j++)
+            {
+                opt[i][j] = opt[i-1][j];
+            }
+            opt[i][i] = COMPANY_A;
+        }
+        else
+        {
+            
+            int costA = minCost[i-1] + (r * s[i]);
+            int costB = minCost[i-4] + (4 * c);
+            minCost[i] = std::min(costA,costB);
+
+            if(costA < costB)
+            {
+                for(int j = 1; j < i-1; j++)
+                {
+                    opt[i][j] = opt[i-1][j];
+                }
+                opt[i][i] = COMPANY_A;
+            }
+            else
+            {
+                for(int j = 1; j < i-4; j++)
+                {
+                    opt[i][j] = opt[i-4][j];
+                }
+
+                for(int x = 3; x >= 0; x--)
+                {
+                    opt[i][i-x] = COMPANY_B;
+                }
+            }
+        }
+    }
+
+    for(int i = 0; i < NUM_WEEKS; i++)
+    {
+        std::string choice = (opt[i][i] == COMPANY_A) ? "Company A" : "Company B";
+        std::cout << "Week " << i << ": " << choice << std::endl;
+    }
+
+    return 0;
+}
+
+\end{lstlisting}
 			\item\ [20 points] Update the algorithm you developed at point (b) to enable the
 reconstruction of the optimal solution, i.e., which company was used in an optimal
 solution for shipping. (Hint: use an auxiliary table like we did in the examples in class.)
@@ -270,7 +339,6 @@ schedule\_1.cpp).
 				\item A printout of the values that you obtain in the table containing the additional information needed to reconstruct the optimal solution, run on the values given
 above (print the entire table!)
 			\end{itemize}
-			\pagebreak
 			\item\ [30 points] Using the additional information computed at point (c), write an algorithm that outputs which company was used for shipping in the optimal schedule. Implement
 this algorithm in C/C++. \\
 			\textbf{Submit}:
@@ -282,17 +350,5 @@ B, A, B)
 			\end{itemize}
 		\end{enumerate}
 	\end{itemize}
-\end{homeworkProblem}
-
-\pagebreak
-
-\begin{homeworkProblem}[3]
-	\textbf{Extra Credit: [20 points]} Indicate whether the following statements are true or false and justify your answers.
-	\begin{enumerate}[label=\alph*.)]
-		\item  If X and Y are sequences that both begin with the character A, every longest common
-subsequence of X and Y begins with A.
-		\item If X and Y are sequences that both end with the character A, some longest common
-subsequence of X and Y ends with A.
-	\end{enumerate}
 \end{homeworkProblem}
 \end{document}
