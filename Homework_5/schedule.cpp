@@ -30,6 +30,7 @@ int main()
             // store it as the total minimum cost for this week
             minCost[i] = minCost[i-1] + (r * s[i]);
 
+            // Store that Company A was the best choice for this week
             for(int j = 1; j < i-1; j++)
             {
                 opt[i][j] = opt[i-1][j];
@@ -38,12 +39,14 @@ int main()
         }
         else
         {
+            // Compute cost for both A and B of this week
             int costA = minCost[i-1] + (r * s[i]);
             int costB = minCost[i-4] + (4 * c);
             minCost[i] = std::min(costA,costB);
 
             if(costA < costB)
             {
+                // Store that Company A was the best choice for this week
                 for(int j = 1; j < i-1; j++)
                 {
                     opt[i][j] = opt[i-1][j];
@@ -52,6 +55,7 @@ int main()
             }
             else
             {
+                // Store that Company B was the best choice for the last four weeks
                 for(int j = 1; j < i-4; j++)
                 {
                     opt[i][j] = opt[i-4][j];
@@ -63,6 +67,12 @@ int main()
                 }
             }
         }
+    }
+
+    for(int i = 0; i < NUM_WEEKS; i++)
+    {
+        std::string choice = (opt[i][i] == COMPANY_A) ? "Company A" : "Company B";
+        std::cout << "Week " << i << ": " << choice << std::endl;
     }
 
     return 0;
