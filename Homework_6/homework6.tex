@@ -223,7 +223,6 @@ Note: you have to prove that your strategy yields the optimal solution.
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
-\hfil
 	\end{itemize}
 \end{homeworkProblem}
 \pagebreak
@@ -250,7 +249,43 @@ note that participants can bike and run simultaneously, but at most one person c
 the pool at any time.) What’s the best order for sending people out, if one wants the
 whole competition to be over as early as possible? More precisely, give an efficient
 algorithm that produces a schedule whose completion time is as small as possible. Note: you have to prove that your strategy yields the optimal solution.
-	\end{itemize}
+
+\solution \\
+
+First, let's start by giving the contestants an incremental id of $1, \ldots, n$,
+and let $s_i, b_i, r_i$ represent the swimming, biking, and
+running times of each participant. $i$.
+The algorithm to devise an optimal schedule is as follows:
+Sort the participants in descending order of $b_i + r_i$,
+and that's the order we'll send them out in, one at a time.
+This order will minimize the competition time.
+
+The proof we'll use is a greedy exchange proof.
+Consider any optimal solution, and suppose it does
+not use this order.
+In that case, the optimal solution has to contain two
+athletes $i$ and $j$ such that $j$ is sent out
+immediately after $i$, but $b_i + r_i < b_j + r_j$.
+We will refer to the two as a pair $(i,j)$ which is an {\em inversion}.
+The solution you get when switching the order
+of $i$ and $j$ is that $j$ completes his earlier
+than he/she used to.
+Also, in the inverted order schedule, $i$ gets out of the pool
+when $j$ previously got out of the pool;
+but since $b_i + r_i < b_j + r_j$, $i$ finishes
+sooner in the inverted order schedule than $j$ finished
+in the previous schedule.
+However because the inverted order schedule does not have a greater
+completion time, it is optimal as well.
+
+Advancing similarly, all inversions can be eliminated without increasing the completion time.
+When finished, the result is a
+schedule in the order produced by our algorithm,
+whose completion time no better than the original optimal order we considered.
+Thus the order produced by our algorithm must
+be truly optimal.
+
+\end{itemize}
 \end{homeworkProblem}
 \pagebreak
 \begin{homeworkProblem}
