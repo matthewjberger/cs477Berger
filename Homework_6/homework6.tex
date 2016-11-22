@@ -213,19 +213,23 @@ Note: you have to prove that your strategy yields the optimal solution.
 
 	\item[] 
 	\solution
-	\begin{algorithm}[]
-        \begin{algorithmic}[1]
-            \Function{MinimizeWSCT}{$list, start, end$}
-                \If{$start \geq end$}
-                    \State{} \Return{}
-                \EndIf{}
-                \State{} $mid \gets \Call{Partition}{list, start, end}$
-                \State{} \Call{Quick-Sort}{$list, start, mid - 1$}
-                \State{} \Call{Quick-Sort}{$list, mid + 1, end$}
-            \EndFunction{}
-        \end{algorithmic}
-        \caption{Start of QuickSort}
-    \end{algorithm}
+\begin{algorithm}
+  \caption{MinimizeWSCT}\label{MWSCT}
+  \begin{algorithmic}[1]
+    \Procedure{MinimizeWSCT}{$a,b$}\Comment{Minimize Weighted Sum of Completion Times}
+      \State $weightsList \gets <the\ weight\ of\ each\ job>$
+      \State $timesList \gets <the\ processing\ time\ for\ each\ job>$
+      \State $timeWeightRatioMap \gets <a map time to weight for\ each job>$
+      \State $tmpTime\gets 0$
+      \State $sum\gets 0$
+      \While{$ratios.Size() > 0$}\Comment{Iterate through all ratios in map}
+        \State $tmpTime += timesList.get(timeWeightRatioMap.Keys[0])$
+        \State $sum += weightsList.get(timeWeightRatioMap.Keys[0]) * tmpTime$
+        \State $timeWeightRatioMap.Remove(timeWeightRatioMap.Keys[0])$
+      \EndWhile\label{MWSCTendwhile}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
 \hfil
 	\end{itemize}
 \end{homeworkProblem}
@@ -278,5 +282,11 @@ one of the base stations. Give an efficient (greedy) algorithm that achieves thi
 using as few base stations as possible. Note: you have to prove that your strategy yields
 the optimal solution.
 	\end{itemize}
+	
+	\solution
+	
+	A possible greedy algorithm to solve this would be one that starts from the leftmost point and at each step places the beginning of the interval at the first uncovered point. This is equivalent to covering a set of points on a real line with 8-unit length intervals, with the goal being to use the minimum number of intervals.
+	
+	To prove this, we can use contradiction. Greedy is not optimal. Let $g_1 < g_2 < ... < g_n$ represent the set of starting positions indicated by the intervals chosen in the algorithm. Let $f_1 < f_2 < ... < f_n$ denote the set of starting points at the intervals of the optimal solution with $f_1 = g_1, f_2 = g_2, \dots, f_n=g_n$ for the largest possible value of n. $g_{n+1} > f_{n+1} $ because of the greedy algorithm. The optimal solution is modified further by making $f'_{n+1} = g_{n+1}$ (pushing the $(r+1)_{th}$ interval further). This covers all of the points, because there cannot be any points in $(f_{n+1},g_{n+1})$ due to the greedy algorithm. The number of intervals does not change, therefore it is optimal. The contradiction is that the new optimal solution has one more starting point in common with the greedy solution.
 \end{homeworkProblem}
 \end{document}
