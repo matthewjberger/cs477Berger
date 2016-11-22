@@ -1,0 +1,282 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{relsize}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% C++ Code Listing Configuration
+%
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+backgroundcolor=\color{lbcolor},
+    tabsize=4,
+%   rulecolor=,
+    language=[GNU]C++,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=false,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        numbers=left,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.026,0.112,0.095},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+%        \lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#6}
+\newcommand{\hmwkDueDate}{November 17th, 2016}
+\newcommand{\hmwkDueTime}{2:30pm}
+\newcommand{\hmwkClass}{CS 477}
+\newcommand{\hmwkClassInstructor}{Monica Nicolescu}
+\newcommand{\hmwkAuthorName}{Matthew J. Berger}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at \hmwkDueTime}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Alias for the Extra Credit section header
+\newcommand{\extracredit}{\textbf{\large Extra Credit}}
+
+% Alias for the Big-O Symbol
+\newcommand{\bigo}{\mathcal{O}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+	\begin{itemize}
+		\item[\textbf{1.)}] \textbf{[40 points](U \& G Required)}\\
+	A company with a photocopying service that has a single large machine faces the following scheduling problem. Every morning, the company receives a set of jobs from its customers. Ideally, the jobs should be run on their single machine in an order that keeps their customers happiest. We know that customer $i$'s job will take $t_i$ time to complete. Given a schedule (i.e., an ordering of the jobs), let $C_i$ represent the finishing time of job $i$. For example, if job $i$ is the first to be done, we would have $C_i$ = $t_i$; and if job $j$ is done right after job $i$, we would have $C_j$ = $C_i$ + $t_j$. Each customer $i$ also has a given weight $w_i$ that represents his or her importance to the business. The happiness of customer $i$ is expected to be dependent on the finishing time of $i$'s job. Therefore, the company decides that they want to order the jobs to minimize the weighted sum of the completion times \(\mathlarger{\sum\limits_{i=1}^n w_iC_i}\).\\
+	Design an efficient algorithm to solve this problem: given a set of $n$ jobs with a processing time $t_i$ and a weight $w_i$ for each job, order the jobs so as to minimize the weighted sum of the completion times, \(\mathlarger{\sum\limits_{i=1}^n w_iC_i}\).\\\\
+	\textbf{Example:} Suppose there are two jobs: the first takes time $t_1 = 1$ and has weight $w_1 = 10$, while the second job takes time $t_2 = 3$ and has weight $w_2 = 2$. Then doing job 1 first would yield a weighted completion time of $10*1 + 2*4 = 18$, while doing the second job first would yield the larger weighted completion time of $10*4 + 2*3 = 46$.
+Note: you have to prove that your strategy yields the optimal solution.
+
+	\item[] 
+	\solution
+	\begin{algorithm}[]
+        \begin{algorithmic}[1]
+            \Function{MinimizeWSCT}{$list, start, end$}
+                \If{$start \geq end$}
+                    \State{} \Return{}
+                \EndIf{}
+                \State{} $mid \gets \Call{Partition}{list, start, end}$
+                \State{} \Call{Quick-Sort}{$list, start, mid - 1$}
+                \State{} \Call{Quick-Sort}{$list, mid + 1, end$}
+            \EndFunction{}
+        \end{algorithmic}
+        \caption{Start of QuickSort}
+    \end{algorithm}
+\hfil
+	\end{itemize}
+\end{homeworkProblem}
+\pagebreak
+\begin{homeworkProblem}
+	\begin{itemize}
+		\item[\textbf{2.)}] \textbf{[40 points](U \& G Required)}\\
+		A student camp counselor is in charge of organizing activities for a set of junior-highschool-age
+campers. He plans the following mini-triathlon exercise: each contestant must
+swim 20 laps of a pool, then bike 10 miles, then run 3 miles. His plan is to send the 
+contestants out in a staggered fashion, based on the following rule: the contestants must
+use the pool one at a time. In other words, the first contestant swims the 20 laps, gets out,
+and starts biking. As soon as the first person is out of the pool, a second contestant begins
+swimming the 20 laps; as soon as he or she is out and starts biking, a third contestant
+begins swimming … and so on.).
+Each contestant has a projected \textit{swimming time} (the expected time it will take him or her
+to complete the 20 laps), a projected \textit{biking time} (the expected time it will take him or her
+to complete the 10 miles of bicycling), and a projected \textit{running time} (the time it will take
+him or her to complete the 3 miles of running). The camp counselor wants to decide on a
+\textit{schedule} for the triathlon: an order in which to sequence the starts of the contestants.
+Let’s say that the completion time of a schedule is the earliest time at which all
+contestants will be finished with all three legs of the triathlon, assuming they each spend
+exactly their projected swimming, biking, and running times on the three parts. (Again,
+note that participants can bike and run simultaneously, but at most one person can be in
+the pool at any time.) What’s the best order for sending people out, if one wants the
+whole competition to be over as early as possible? More precisely, give an efficient
+algorithm that produces a schedule whose completion time is as small as possible. Note: you have to prove that your strategy yields the optimal solution.
+	\end{itemize}
+\end{homeworkProblem}
+\pagebreak
+\begin{homeworkProblem}
+	\begin{itemize}
+		\item[\textbf{3.)}] \textbf{[20 points](U \& G Required)}\\
+		Construct an optimal Huffman coding tree for the characters I with frequency 75, U with
+frequency 200, B with frequency 25, S with frequency 275, C with frequency 50, H with
+frequency 100, M with frequency 25, and P with frequency 250. How many bits are
+required to store the above characters using the resulting encoding? (Show your work for
+building the Huffman codes).
+	\end{itemize}
+\end{homeworkProblem}
+\pagebreak
+\begin{homeworkProblem}[5]
+	\begin{itemize}
+		\item[\textbf{5.)}] \textbf{[20 points](Extra Credit)}\\
+Consider a long, quiet country road with houses scattered very sparsely along it. (We can
+picture the road as a long line segment, with an eastern endpoint and a western endpoint).
+The residents of all these houses are avid cell phone users. You want to place cell phone
+base stations at certain points along the road, so that every house is within four miles of
+one of the base stations. Give an efficient (greedy) algorithm that achieves this goal,
+using as few base stations as possible. Note: you have to prove that your strategy yields
+the optimal solution.
+	\end{itemize}
+\end{homeworkProblem}
+\end{document}
