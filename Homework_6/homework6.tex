@@ -212,21 +212,14 @@ backgroundcolor=\color{lbcolor},
 Note: you have to prove that your strategy yields the optimal solution.
 
 	\item[] 
-	\solution
+	\solution\\
+	For a set of jobs, each job i has been assigned a weight and a processing time. After sorting S we'll have a completion time $C_i$ for each job $i$. The greedy solution is to do the job with the larger weight/time first because in unit time the job has the larger weight, minimizing our formula.
 \begin{algorithm}
   \caption{MinimizeWSCT}\label{MWSCT}
   \begin{algorithmic}[1]
     \Procedure{MinimizeWSCT}{$a,b$}\Comment{Minimize Weighted Sum of Completion Times}
-      \State $weightsList \gets <the\ weight\ of\ each\ job>$
-      \State $timesList \gets <the\ processing\ time\ for\ each\ job>$
-      \State $timeWeightRatioMap \gets <a map time to weight for\ each job>$
-      \State $tmpTime\gets 0$
-      \State $sum\gets 0$
-      \While{$ratios.Size() > 0$}\Comment{Iterate through all ratios in map}
-        \State $tmpTime += timesList.get(timeWeightRatioMap.Keys[0])$
-        \State $sum += weightsList.get(timeWeightRatioMap.Keys[0]) * tmpTime$
-        \State $timeWeightRatioMap.Remove(timeWeightRatioMap.Keys[0])$
-      \EndWhile\label{MWSCTendwhile}
+      \State $ratioList \gets <value\ of\ weight/time\ for\ each\ job>$
+      \State Sort the ratioList in descending order. \Comment{Process the jobs in this order!}
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
