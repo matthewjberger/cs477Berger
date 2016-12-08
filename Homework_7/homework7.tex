@@ -256,13 +256,17 @@ from vertex A? List the edges by giving their endpoints.
 	\begin{itemize}
 		\item[22.5-6)]
 		Given a directed graph $G = (V,E)$, explain how to create another graph $G'=(V,E')$ such that 
-		\begin{enumerate}[label=\alph*.)]
+		\begin{itemize}
 			\item $G'$ has the same strongly connected components as $G$
 			\item $G'$ has the same component graph as $G$
 			\item $E'$ is as small as possible.
-		\end{enumerate}
+		\end{itemize}
 		Describe a fast algorithm to compute $G'$.			
 	\end{itemize}
+	
+	\solution
+	
+	First, we generate $k$ connected components and a strongly connected component subgraph. For each connected component, there must be a loop that can go to all the points, and only the loop is added to the new graph. Assume that the i-th connected component has 5 nodes a, b, c, d, and e. We only need to add sides $a \rightarrow b$, $b \rightarrow c$, $c \rightarrow d$, $d \rightarrow e$, $e \rightarrow a$. Select the edge of the SCC subgraph and add it to the new graph. The nodes can be selected arbitrarily, which makes the algorithm fast.
 \end{homeworkProblem}
 
 \pagebreak
@@ -312,7 +316,26 @@ Step & S           & dist{[}A{]} & dist{[}B{]} & dist{[}C{]} & dist{[}D{]} \\ \h
 \begin{homeworkProblem}[6]
 	\textbf{[20 points](Extra Credit)} Exercise 24.3-6 (page 663).\\
 	\begin{itemize}
-		\item[24.3-6)] We are given a directed graph $G = (V,E)$ on which each edge $(u,v) \in E$ has an associated value $r(u,v)$, which is a rela number in the range $0 \leq r(u,v) \leq 1$ that represents the reliability of a communication channel from vertex $u$ to vertex $v$. We interpret $r(u,v)$ as the probability that the channel from $u$ to $v$ will not fail, and we assume that these probabilities are independent. Give an efficient algorithm to find the most reliable path between two given vertices.
+		\item[24.3-6)] We are given a directed graph $G = (V,E)$ on which each edge $(u,v) \in E$ has an associated value $r(u,v)$, which is a real number in the range $0 \leq r(u,v) \leq 1$ that represents the reliability of a communication channel from vertex $u$ to vertex $v$. We interpret $r(u,v)$ as the probability that the channel from $u$ to $v$ will not fail, and we assume that these probabilities are independent. Give an efficient algorithm to find the most reliable path between two given vertices.
+		
+		\solution
+		
+		The most reliable path between two given vertices would be a path $p$ where the product of the probabilities on that path is maximized. Let $s$ be our source and $d$ be our destination, and let $p= \{v_0,v_1\,\dots,v_k\}$ where $v_0 = s$ and $v_k = t$, then:
+		
+		\begin{center}
+			$\mathlarger{\mathlarger{p=arg\ max\ \Pi^{k}_{i=0}\ r(v_{i-1},v_i)}}$
+		\end{center}
+		
+		The problem can be converted to a shortest path problem with a single source by letting the weight on edge $(u,v)$ be $w(u,v) = -\log{r(u,v)}$. Logarithm doesn't change the monotonicity, and a negative logarithm will convert a minimization problem into a maximization problem. So a shortest path $p$ on the converted graph that satisfies:
+		
+		\begin{center}
+			$\mathlarger{\mathlarger{p=arg\ min\ \sum^{k}_{i=1}\ w(v_{i-1},v_i)}}$
+		\end{center}
+		
+		will technically satisfy the initial equation as well.\\
+		
+		Dijkstra's algorithm can be used to solve the shortest path problem on the converted graph. Initialization of the weights takes $\bigo (E)$ time, and the rest are the same as Dijkstra's algorithm. If the graph is mathematically sparse (meaning $E = \bigo (\frac{V^2}{\log{V}})$), and all vertices are accessible from the source node, then the algorithm will run in $\bigo ((V+E)\log{V}+E)+\bigo (E) = \bigo (E\log{V})$. This algorithm satisfies the problem's requirement for finding an an efficient algorithm to calculate the most reliable path between two given vertices.
+		
 	\end{itemize}
 \end{homeworkProblem}
 
