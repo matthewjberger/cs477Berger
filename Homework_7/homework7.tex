@@ -231,6 +231,21 @@ from vertex A? List the edges by giving their endpoints.
 	\textbf{[30 points](U \& G Required)} Exercise 22.2-9 (page 602).\\
 	\begin{itemize}
 		\item[22.2-9)]	Let $G = (V,E)$ be a connected, undirected graph. Give an $\bigo (V + E)$-time algorithm to compute a path in $G$ that traverses each edge in $E$ exactly once in each direction. Describe how you can find your way out of a maze if you are given a large supply of pennies.
+		
+		\solution
+		
+		A depth-first-search variant will work well here. Each edge is going to be marked the first and second time it is traversed, with each marking being unique for each traversal. Edges that have already been traversed twice may not be taken again.\\ 
+		Our DFS algorithm ensures that all edges are traversed and that each edge is traversed in both directions. By always taking unexplored edges before edges that have already been explored once, we ensure that all edges are explored. We can also ensure that all edges are taken in both directions by backtracking until a new unexplored edge is found. Using this method, the edges are explored in the reverse direction during backtracking. 
+		
+		The complexity of this algorithm is as requested: $\bigo (V+E)$
+		
+		The steps are as follows:
+		\begin{itemize}
+			\item Execute a depth-first search of $G$ starting an arbitrary vertex. DFS will explore the edges in the graph in the same path as requested by the problem.
+			\item While exploring an edge $(u,v)$ that goes to an unvisited node, the edge $(u,v)$ is included for the first time in the path.
+			\item When the DFS backtracks to edge $u$ again after v is marked, the edge $(u,v)$ is included for the 2nd time in the path, but in the opposite direction ($(v,u)$ instead of $(u,v)$).
+			\item When the DFS explores an edge $(u,v)$ that goes to an already marked (visited) node, we add $(u,v) (v,u)$ to the path. This ensures that each edge is added to the path exactly twice.
+		\end{itemize}
 	\end{itemize}
 \end{homeworkProblem}
 
@@ -255,7 +270,40 @@ from vertex A? List the edges by giving their endpoints.
 \begin{homeworkProblem}
 	\textbf{[20 points](U \& G Required)} Exercise 24.3-2 (page 663).\\
 	\begin{itemize}
-		\item[24.3-2)] Give a simple example of a directed graph with negative-weight edges for which Dijkstra’s algorithm produces incorrect answers. Why doesn’t the proof of Theorem 24.6 go through when negative-weight edges are allowed?					
+		\item[24.3-2)] Give a simple example of a directed graph with negative-weight edges for which Dijkstra's algorithm produces incorrect answers. Why doesn’t the proof of Theorem 24.6 go through when negative-weight edges are allowed?					
+		
+		\solution
+		
+		The proof of Theorem 24.6 doesn't go through when negative weight edges are allowed because the conclusion that $\delta (s,y) \leq \delta (s,u)$ because $y$ occurs before $u$ on the shortest path from $s$ to $u$ doesn't hold when there are negative edges. If there are negative weight edges in the path from $y$ to $u$ then  $\delta (s,y)$ is not necessarily $\leq \delta (s,u)$. The proof is based on the conclusion above, therefore it will not be correct if negative edges are present in the graph.
+		
+		Running Dijkstra's algorithm on the graph below with vertex $A$ as the source produces incorrect results. The actual shortest path from $A$ to $B$ is of weight 2 and the weight of the actual shortest path from $A$ to $D$ is 6.\\
+		
+\centering
+\begin{tikzpicture}
+\node [draw , circle] (A) at (-1, 2) {$A$};
+\node [draw , circle] (B) at ( 1, 2) {$B$};
+\node [draw , circle] (C) at (-1, 4) {$C$};
+\node [draw , circle] (D) at ( 3, 2) {$D$};
+
+\draw (A) -- (C) node [midway, fill=white]{4};
+\draw (A) -- (B) node [midway, fill=white]{3};
+\draw (C) -- (B) node [midway, fill=white]{-2};
+\draw (B) -- (D) node [midway, fill=white]{4};
+\end{tikzpicture}
+
+\begin{table}[h]
+\centering
+\caption{The Results of Dijkstra's Algorithm}
+\label{dijkstra_table}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Step & S           & dist{[}A{]} & dist{[}B{]} & dist{[}C{]} & dist{[}D{]} \\ \hline
+1    & \{A\}       & 0           & 3           & 4           & $\infty$ \\ \hline
+2    & \{A,B\}     & 0           & 3           & 4           & 7           \\ \hline
+3    & \{A,B,C\}   & 0           & 3           & 4           & 7           \\ \hline
+4    & \{A,B,C,D\} & 0           & 3           & 4           & 7           \\ \hline
+\end{tabular}
+\end{table}
 	\end{itemize}
 \end{homeworkProblem}
 
